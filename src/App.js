@@ -4,13 +4,16 @@ import Header from './components/Header';
 import {Routes,Route} from 'react-router-dom'; 
 import CardsDetails from './components/CardsDetails';
 import Cards from './components/Cards';
+import Payments from './components/Payments';
 
 function App() {
   return (
     <> 
     <Header />
     <Routes>
-    <Route /> 
+    <Route path='/' element={<Cards />} />
+    <Route path='/cart' element={<CardsDetails />} /> 
+    <Route path='/payments' element={<Payments />} /> 
     </Routes>
     </>
   );
