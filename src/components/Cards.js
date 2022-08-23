@@ -1,7 +1,7 @@
-import { getByDisplayValue } from "@testing-library/react";
 import React, {useState,useEffect} from 'react'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import "./style.scss";
 
 
 
@@ -31,14 +31,23 @@ function Cards() {
 
       {user.map(data => (
       <Card style={{ width: '22rem',border:"none"}} className="mx-2 mt-4 card_style">
-      <Card.Img variant="top" src="https://electronic-ecommerce.herokuapp.com/fantechHeadset.jpg" style={{height:"16rem"}} />
+      <Card.Img variant="top" src="https://electronic-ecommerce.herokuapp.com/fantechHeadset.jpg" style={{height:"16rem"}} className="mt-3" />
       <Card.Body>
-        <Card.Title>Card Title</Card.Title>
+        <Card.Title>{data.name}</Card.Title>
         <Card.Text>
-          data.price 
+          <strong>Price:</strong> {data.price}
+          <br />
+          <strong>Quantity:</strong> {data.stock} items left
+          <br />
+          <strong>Created Date:</strong> {data.createDate}
+          <br />
+          <strong>Category:</strong> {data.category}
+      
         </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
-      </Card.Body>
+        <div className='button_div d-flex justify-content-center'>
+        <Button variant="primary" className='col-lg-12'>Add to Cart</Button>
+        </div>
+        </Card.Body>
     </Card>
 
       ))}</div>

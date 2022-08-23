@@ -1,8 +1,52 @@
 import React from 'react'
+import {Formik, Form, Field, ErrorMessage, } from "formik";
+import * as yup from "yup";
+import KErrorMessage from './KErrorMessage';
+import "./Payments.scss";
+
+const validationSchema = yup.object({
+    name:yup.string().required("Name is required !"),
+    phone:yup.number().min(1000000000, "Not a valid phone number").max(100000000000, "Not a valid phone number").
+    required("Phone is required !"),
+    billing:yup.string().required("Billing Address is required !"),
+    delivery:yup.string().required("Delivery Address is required !"),
+    date:yup.date().required("Date is required !")
+}) 
 
 function Payments() {
   return (
-    <div>Payments</div>
+    <div>
+    <h1 style={{textAlign:"center"}}>Enter Your Payment Detais</h1>
+    <Formik
+       validationSchema={validationSchema}
+    initialValues={{name: "", phone: "",billing:"",delivery:"",date:""}} onSubmit={(values)=>{
+        console.log(values);
+    }}>
+    <Form   className='hello'>
+        <label className='hello1'>Name: </label>
+        <Field className='hello2' name="name" type="text" />
+        <KErrorMessage name="name" />
+        <br />
+        <label className='hello1'>Phone No: </label>
+        <Field className='hello2' name="phone" type="number" />
+        <KErrorMessage name="phone" />
+        <br />
+        <label className='hello1'>Billing Address: </label>
+        <Field className='hello2' name="billing" type="text" />
+        <KErrorMessage name="billing" />
+        <br />
+        <label className='hello1'>Delivery Address: </label>
+        <Field className='hello2' name="delivery" type="text" />
+        <KErrorMessage name="delivery" />
+        <br />
+        <label className='hello1'>Date: </label>
+        <Field className='hello2' name="date" type="date" />
+        <KErrorMessage name="date" />
+        <br />
+        <button className='hello3' type='submit'>Submit</button>
+    </Form>
+    </Formik>
+    </div> 
   )
 }
 
