@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { DLT } from '../redux/actions/action';
 
 
+
 const CardsDetails = () => {
 
   const [data,setData] =useState([]);
@@ -62,7 +63,7 @@ const CardsDetails = () => {
       <p><strong>Quantity Left</strong> :{ele.stock}</p>
       <p><strong>Category</strong> : {ele.category}</p>
       <p><strong>Created Date</strong> :{ele.createDate}</p>
-      <p><button onClick={()=>dlt(ele.id)}>Delete Me</button></p>
+      <p><button type="button" class="btn btn-danger" onClick={()=>dlt(ele.id)}>Remove</button></p>
     {/*  <p><strong>Remove : </strong><span> <i className="fas-fa-trash"  style={{color:"red", fontSize:20, cursor:"pointer"}}></i> </span> </p> */}
     <p> <strong>Total</strong> :300 </p>
     <div className='mt-5 d-flex justify-content-between align-items-center' style={{width:100,cursor:"pointer",background:"#ddd",color:"#11"}}>

@@ -5,10 +5,13 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { NavLink } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
+import { Navigate, NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Table from 'react-bootstrap/esm/Table';
 import { DLT } from '../redux/actions/action';
+import "./Payments.scss";
+
 
 
 
@@ -48,6 +51,12 @@ function Header() {
     useEffect(()=>{
         total();
     },[total])
+
+    const navigate = useNavigate();
+
+    const navigateToPayments =() => {
+        navigate('/payments')
+    }
 
     return (
         <>
@@ -111,7 +120,7 @@ function Header() {
                                                 <p>Quantity: {e.stock}</p>
                                             </td>
                                             <td>
-                                                  <p  onClick={()=>dlt(e.id)}>  <button>Delete me </button> </p>
+                                                  <p  onClick={()=>dlt(e.id)}>  <button type="button" class="btn btn-danger">Remove</button> </p>
                                         
         
                                                 </td>
@@ -123,8 +132,11 @@ function Header() {
                                 }
                             )}
 
-
-                                <p className="text-center">Total: {price} </p>
+                                
+                                <p className="text-center" ><strong>Total:</strong> {price} </p>
+                              <button type="button" className="btn btn-success" style={{marginLeft:"7px"}}
+                               onClick={() => { navigateToPayments(); handleClose();}}>Checkout</button>
+                        
                                     </tbody>
 
 

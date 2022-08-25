@@ -5,6 +5,7 @@ import {Routes,Route} from 'react-router-dom';
 import CardsDetails from './components/CardsDetails';
 import Cards from './components/Cards';
 import Payments from './components/Payments';
+import { Footer } from './components/Footer';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
     <Route path='/cart/:id' element={<CardsDetails />} /> 
     <Route path='/payments' element={<Payments />} /> 
     </Routes>
+    <Footer></Footer>
     </>
   );
 }

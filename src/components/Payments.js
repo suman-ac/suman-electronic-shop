@@ -4,6 +4,8 @@ import * as yup from "yup";
 import KErrorMessage from './KErrorMessage';
 import "./Payments.scss";
 
+
+
 const validationSchema = yup.object({
     name:yup.string().required("Name is required !"),
     phone:yup.number().min(1000000000, "Not a valid phone number").max(100000000000, "Not a valid phone number").
@@ -46,6 +48,7 @@ function Payments() {
         <button className='hello3' type='submit'>Submit</button>
     </Form>
     </Formik>
+
     </div> 
   )
 }
