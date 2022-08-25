@@ -6,8 +6,16 @@ import Navbar from 'react-bootstrap/Navbar';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function Header() {
+
+    const getdata = useSelector((state)=>state.cartreducer);
+    console.log(getdata);
+ 
+    
+
+
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -25,7 +33,7 @@ function Header() {
                         <NavLink to="/" className="text-decoration-none text-light">Home</NavLink>
                     </Nav>
 
-                    <Badge badgeContent={4} color="primary"
+                    <Badge badgeContent={getdata.length} color="primary"
                         id="demo-positioned-button"
                         aria-controls={open ? 'demo-positioned-menu' : undefined}
                         aria-haspopup="true"

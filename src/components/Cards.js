@@ -1,13 +1,24 @@
 import React, {useState,useEffect} from 'react'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { useDispatch } from 'react-redux';
 import "./style.scss";
+//import { ADD } from '../redux/actions/action';
+
 
 
 
 function Cards() {
 
+
   const [user,setUser] = useState([]);
+
+  const dispatch = useDispatch();
+
+  const send =(e)=> {
+    console.log(e)
+    //dispatch(ADD(e));
+  }
 
   const fetchData =()=>{
       fetch("https://electronic-ecommerce.herokuapp.com/api/v1/product")
@@ -45,7 +56,9 @@ function Cards() {
       
         </Card.Text>
         <div className='button_div d-flex justify-content-center'>
-        <Button variant="primary" className='col-lg-12'>Add to Cart</Button>
+        <Button variant="primary"
+        onClick={()=> send(data)}
+         className='col-lg-12'>Add to Cart</Button>
         </div>
         </Card.Body>
     </Card>
