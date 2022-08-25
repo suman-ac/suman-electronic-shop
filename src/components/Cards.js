@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { useDispatch } from 'react-redux';
 import "./style.scss";
-//import { ADD } from '../redux/actions/action';
+import { ADD } from '../redux/actions/action';
 
 
 
@@ -16,8 +16,8 @@ function Cards() {
   const dispatch = useDispatch();
 
   const send =(e)=> {
-    console.log(e)
-    //dispatch(ADD(e));
+    //console.log(e)
+    dispatch(ADD(e));
   }
 
   const fetchData =()=>{
