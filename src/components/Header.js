@@ -20,8 +20,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function Header() {
 
-    const [price,setPrice] = useState(0);
-   // console.log(price);
+    const [price, setPrice] = useState(0);
+    // console.log(price);
 
     const getdata = useSelector((state) => state.cartreducer.carts);
     // console.log(getdata);
@@ -38,7 +38,7 @@ function Header() {
         setAnchorEl(null);
     };
 
-    const dlt = (id)=> {
+    const dlt = (id) => {
         dispatch(DLT(id))
 
     }
@@ -56,23 +56,23 @@ function Header() {
     //     setPrice(totalPrice);
     // };
 
-    const total = ()=> {
+    const total = () => {
         let price = 0;
-        getdata.map((ele,k)=> {
-            const priceInNumber = Number(ele?.price?.slice(1,10)) 
+        getdata.map((ele, k) => {
+            const priceInNumber = Number(ele?.price?.slice(1, 10))
             // console.log(priceInNumber)
             price = priceInNumber + price;
         });
         setPrice(price);
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         total();
-    },[total])
+    }, [total])
 
     const navigate = useNavigate();
 
-    const navigateToPayments =() => {
+    const navigateToPayments = () => {
         navigate('/payments')
     }
 
@@ -82,23 +82,23 @@ function Header() {
                 <Container>
                     {/* <NavLink to="/" className="text-decoration-none text-light mx-3">Add to Cart</NavLink> */}
                     <Nav className="me-auto">
-                        <NavLink to="/" className="text-decoration-none text-light">Home</NavLink>
+                        <NavLink to="/" className="text-decoration-none text-light" id='home-edit'>Home</NavLink>
                         <NavDropdown title="Filter Products" id="navbarScrollingDropdown">
-                        <NavDropdown.Item href="#byprice">By Price</NavDropdown.Item>
-                        {/* <NavDropdown.Item href="#bycategory">
+                            <NavDropdown.Item href="#byprice">By Price</NavDropdown.Item>
+                            {/* <NavDropdown.Item href="#bycategory">
                             By Category
                         </NavDropdown.Item> */}
-                        <DropdownSubmenu href="#action/3.7" title="By Category">
-                            <NavDropdown.Item href="#category/electronic">Electronic</NavDropdown.Item>
-                            <NavDropdown.Item href="#category/watch">Watch</NavDropdown.Item>
-                            <NavDropdown.Item href="#category/keyboard">Keyboard</NavDropdown.Item>
-                            <NavDropdown.Item href="#category/laptop">Laptop</NavDropdown.Item>
-                            <NavDropdown.Item href="#category/mobile">Mobile</NavDropdown.Item>
-                            <NavDropdown.Item href="#category/headseat">Headset</NavDropdown.Item>
+                            <DropdownSubmenu href="#action/3.7" title="By Category">
+                                <NavDropdown.Item href="#category/electronic">Electronic</NavDropdown.Item>
+                                <NavDropdown.Item href="#category/watch">Watch</NavDropdown.Item>
+                                <NavDropdown.Item href="#category/keyboard">Keyboard</NavDropdown.Item>
+                                <NavDropdown.Item href="#category/laptop">Laptop</NavDropdown.Item>
+                                <NavDropdown.Item href="#category/mobile">Mobile</NavDropdown.Item>
+                                <NavDropdown.Item href="#category/headseat">Headset</NavDropdown.Item>
 
-                        </DropdownSubmenu>
-                        <NavDropdown.Item href="#bydate">By Date</NavDropdown.Item>
-                    </NavDropdown>
+                            </DropdownSubmenu>
+                            <NavDropdown.Item href="#bydate">By Date</NavDropdown.Item>
+                        </NavDropdown>
                     </Nav>
 
                     <Badge badgeContent={getdata.length} color="primary"
@@ -138,41 +138,41 @@ function Header() {
                                         </tr>
                                     </thead>
                                     <tbody>
-                            {
-                                getdata.map((e)=> {
-                                    return (
-                                        <>
-                                        <tr>
-                                            <td>
-                                           <NavLink to={`/cart/${e.id}`} onClick={handleClose}>
-                                           <img src='https://electronic-ecommerce.herokuapp.com/fantechHeadset.jpg' style={{width:"5rem",height:"5rem"}} />
-                                           </NavLink>
-                                            </td>
-                                            <td>
-                                                <p>{e.name}</p>
-                                                <p>Price: Rs.{e.price?.slice(1,10)}</p>
-                                                <p>Quantity: {e.stock}</p>
-                                            </td>
-                                            <td>
-                                                <p  onClick={()=>{dlt(e.id);notify()}}>  
-                                                 <button type="button" class="btn btn-danger">Remove</button> 
-                                                </p>
-                                                <ToastContainer autoClose={100} />
-                                            </td>
-                                            
-                                        </tr>
-                                        
-                                        </>
-                                    )
-                                }
-                            )}
+                                        {
+                                            getdata.map((e) => {
+                                                return (
+                                                    <>
+                                                        <tr>
+                                                            <td>
+                                                                <NavLink to={`/cart/${e.id}`} onClick={handleClose}>
+                                                                    <img src='https://electronic-ecommerce.herokuapp.com/fantechHeadset.jpg' style={{ width: "5rem", height: "5rem" }} />
+                                                                </NavLink>
+                                                            </td>
+                                                            <td>
+                                                                <p>{e.name}</p>
+                                                                <p>Price: Rs.{e.price?.slice(1, 10)}</p>
+                                                                <p>In Stock: {e.stock}</p>
+                                                            </td>
+                                                            <td>
+                                                                <p onClick={() => { dlt(e.id); notify() }}>
+                                                                    <button type="button" class="btn btn-danger">Remove</button>
+                                                                </p>
+                                                                <ToastContainer autoClose={100} />
+                                                            </td>
 
-                                
-                                <p className="text-center" ><strong>TotalPrice:</strong>Rs.{price} </p>
-                                <p className="text-center" ><strong>Total Amount:</strong>{getdata?.length}</p>
-                              <button type="button" className="btn btn-success" style={{marginLeft:"7px"}}
-                               onClick={() => { navigateToPayments(); handleClose();}}>Checkout</button>
-                        
+                                                        </tr>
+
+                                                    </>
+                                                )
+                                            }
+                                            )}
+
+                                        <p className="text-center" ><strong>Total Amount:</strong>{getdata?.length}</p>
+                                        <p className="text-center" ><strong>Cost:</strong>Rs.{price} </p>
+
+                                        <button type="button" className="btn btn-success" style={{ marginLeft: "7px" }}
+                                            onClick={() => { navigateToPayments(); handleClose(); }}>Checkout</button>
+
                                     </tbody>
 
 
@@ -185,8 +185,8 @@ function Header() {
                                 <p style={{ fontsize: 22 }}>Your cart is empty</p>
                                 <img src="./cart.png" alt="" className='emptycart_img' style={{ width: "5rem", padding: 10 }} />
                                 <br />
-                                <button type="button" className="btn btn-success" style={{marginLeft:"7px"}} disabled
-                               >Checkout</button>
+                                <button type="button" className="btn btn-success" style={{ marginLeft: "7px" }} disabled
+                                >Checkout</button>
 
                             </div>
 
