@@ -1,3 +1,5 @@
+
+
 import React, { useEffect, useState } from 'react'
 import Table from 'react-bootstrap/Table';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -10,6 +12,7 @@ const CardsDetails = () => {
 
   const [data,setData] =useState([]);
   // console.log(data);
+  const [productCount , setProductCount] = useState(1)
 
         const {id} = useParams();
 //    console.log(id);
@@ -34,10 +37,12 @@ const CardsDetails = () => {
 
   }
 
-
-    useEffect(()=> {
-      compare();
-    },[id])
+  const decreaseProduct = ()=>{
+    setProductCount(productCount - 1)
+  }
+  useEffect(()=> {
+    compare();
+  },[id])
 
   return (
     <>
@@ -59,17 +64,22 @@ const CardsDetails = () => {
     <tr>
       <td>
       <p><strong>Product Name</strong> : {ele.name}</p>
-      <p><strong>Price</strong> : {ele.price}</p>
-      <p><strong>Quantity Left</strong> :{ele.stock}</p>
-      <p><strong>Category</strong> : {ele.category}</p>
+      <p><strong>Price</strong> : Rs.{ele.price.toLocaleString('en').slice(1,10)}</p>
+      <p><strong>Quantity </strong> :{productCount}</p>
+      <div className='category_section'>
+            <div><strong>Category:</strong></div>
+            <div className="categoryInnerSection">{ele.category.map((items)=>(
+              <div className='categoryExamples'>{items}</div>
+            ))}</div>
+      </div>
       <p><strong>Created Date</strong> :{ele.createDate}</p>
       <p><button type="button" class="btn btn-danger" onClick={()=>dlt(ele.id)}>Remove</button></p>
     {/*  <p><strong>Remove : </strong><span> <i className="fas-fa-trash"  style={{color:"red", fontSize:20, cursor:"pointer"}}></i> </span> </p> */}
-    <p> <strong>Total</strong> :300 </p>
+    <p> <strong>Total</strong> :Rs.{Number(ele.price?.slice(1,10)) * Number(productCount)} </p>
     <div className='mt-5 d-flex justify-content-between align-items-center' style={{width:100,cursor:"pointer",background:"#ddd",color:"#11"}}>
-<span style={{fontSize:24}}>-</span>
-<span style={{fontSize:22}}>{ele.qnty}</span>
-<span style={{fontSize:24}}>+</span>
+      <span style={{fontSize:24}} onClick={(e)=>setProductCount(productCount > 1 ? productCount - 1 : 1)}>-</span>
+      <span style={{fontSize:22}}>{productCount}</span>
+      <span style={{fontSize:24}} onClick={(e)=>setProductCount(productCount + 1)}>+</span>
     </div>
       </td>
     </tr>
@@ -96,3 +106,4 @@ const CardsDetails = () => {
 
 
 export default CardsDetails
+
